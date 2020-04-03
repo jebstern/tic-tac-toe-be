@@ -1,4 +1,4 @@
-const Item = require("../models/record");
+const Record = require("../models/record");
 
 exports.update = function(req, res) {
   const record = req.body;
@@ -17,7 +17,7 @@ exports.update = function(req, res) {
     return res.status(500).send({ error: "Invalid body content" });
   }
 
-  Item.findOneAndUpdate(
+  Record.findOneAndUpdate(
     { username: record.username },
     { $inc: { wins: record.wins, losses: record.losses, draws: record.draws } },
     { new: true, fields: { _id: 0, __v: 0 } },
@@ -34,4 +34,13 @@ exports.update = function(req, res) {
       }
     }
   );
+};
+
+exports.all = function(req, res) {
+  Record.find({}, "-_id -__v", function(err, items) {
+    if (err) {
+      return res.status(500).send({ mode: "find", error: err });
+    }
+    res.status(200).send(items);
+  });
 };
