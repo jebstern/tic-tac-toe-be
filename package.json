@@ -16,7 +16,7 @@
     "mongoose": "^5.8.12"
   },
   "devDependencies": {
-    "mongo-express": "^0.54.0",
+    "mongo-express": "^1.0.0-alpha.4",
     "nodemon": "^2.0.2"
   }
 }
